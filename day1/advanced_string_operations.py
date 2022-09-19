@@ -12,19 +12,29 @@ def print_5s():
     print(f"{len(sssss_bytes) = }")
     print(f"{sssss_bytes = }")
 
+## EXAMPLE on unicode below:
+def notlatin_string():
+    not_latin = "これは文字列です"
+    print(f"{len(not_latin) = }")
+    not_latin_bytes = not_latin.encode('utf-8')
+    print(f"{len(not_latin_bytes) = }")
+    print(f"{not_latin_bytes = }")
+notlatin_string()
+
 
 def working_with_bytes():
     b_empty = bytes()
-    print(f"{b_empty = }")
+    print(f"{b_empty = }") # empty byte sequence
     print(f"{len(b_empty) = }")
-    b_random = bytes(random.choices(range(256), k=10))
+    b_random = bytes(random.choices(range(256), k=10)) # generates random bytes
     print(f"{b_random = }")
+    #print(f"{ord(b'G') = }" # translates the character produced by the random.choices
     b_chars = b'the moon is shining so bright'
     print(f"{b_chars = }")
     # not all byte sequences are encodeable
     s_random = b_random.decode('utf-8')
     # only allows 0..255
-    b_fail = bytes([268])  # raises ValueError
+    b_fail = bytes([268])  # raises ValueError as this is out of the 0-256 range
 
 
 def print_triple_quoted():
