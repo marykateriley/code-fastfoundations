@@ -87,15 +87,42 @@ def quantifiers():
     result = re.search(regex, string)
     print(f"{regex:<30}: {result.group()}")
     # combine .* with a character class and quantifier
-    regex = r".*\d+"
+    regex = r".*\d+" # greedy. will continue on pass the first set of numbers
     result = re.search(regex, string)  # *, +, ? are greedy
     print(f"{regex:<30}: {result.group()}")
-    regex = r".*?\d+"
+    regex = r".*?\d+" # ? is non-greedy. it will stop at first set of numbers
     result = re.search(regex, string)  # *?, +?, ?? are non-greedy
     print(f"{regex:<30}: {result.group()}")
     regex = r"\d{4}"
     result = re.search(regex, string)  # specify the size of the match
     print(f"{regex:<30}: {result.group()}")
+
+#TASK
+
+def six_letter():
+    regex = r"\w{6} "
+    result = re.search(regex, string)
+    print(f"{regex:<30}: {result.group()}")
+# print(six_letter())
+
+def words():
+    regex = r"\w{4}\s\w{7}\s\w{3}"
+    result = re.search(regex, string)
+    print(f"{regex:<30}: {result.group()}")
+# print(words())
+
+def no_space():
+    regex = r"\w{3}\S"
+    result = re.search(regex, string)
+    print(f"{regex:<30}: {result.group()}")
+#print(no_space())
+
+def email():
+    regex = r"[\w\d][.\w\d]*@[\w\d][.\w\d]+"
+    result = re.search(regex, string)
+    print(f"{regex:<30}: {result.group()}")
+# print(email())
+
 
 
 def custom_classes_and_escaping_sequences():
@@ -138,7 +165,7 @@ def grouping_and_capturing_regexes():
     regex = r"(\w{3}|\d{3})"  # match one of many using |
     result = re.search(regex, string)  # make it a group
     print(f"{regex:<30}: {result.group(1)}")
-    regex = r"(?P<phone_number>[-+\d]+)"  # give the variable a name
+    regex = r"(?P<phone_number>[-+\d]+)"  # give the variable a name - effectively makes a dictionary as there is a key
     result = re.search(regex, string)
     print(f"{regex:<30}: {result.group('phone_number')}")
 
@@ -159,13 +186,13 @@ def control_flags():
 
 
 def main():
-    get_match_object()
-    character_classes()
-    positional_anchors()
-    quantifiers()
-    custom_classes_and_escaping_sequences()
-    grouping_and_capturing_regexes()
-    control_flags()
+    # get_match_object()
+    # character_classes()
+    # positional_anchors()
+    # nquantifiers()
+    # custom_classes_and_escaping_sequences()
+    # grouping_and_capturing_regexes()
+    # control_flags()
     return 0
 
 

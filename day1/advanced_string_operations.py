@@ -109,19 +109,19 @@ def get_distance(string):
     print(f"{split_new_sentence}")
     float_values = list(map(float, split_new_sentence[3:9])) # this takes out the chunk of the list we need
     print(float_values)
-    x1, y1, z1, x2, y2, z2 = float_values
-    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
+    x1, y1, z1, x2, y2, z2 = float_values # unpacks the list
+    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2) # gets the distance between two points
     print(f"{distance = }")
 
-get_distance(new_sentence)
+#get_distance(new_sentence)
 def string_method_formatting(string: str):
     width, height = shutil.get_terminal_size()
     print(f"terminal dimensions (w,h): {width, height}")
     # justification: rjust, center, ljust, zfill
-    print(string.rjust80)
-    print(string.center80)
-    print(string.ljust80)
-    print(string.zfill80)
+    print(string.rjust(80)) # 80 is the width, this can be replaced with width
+    print(string.center(80))
+    print(string.ljust(80))
+    print(string.zfill(80))
     # case: capitalize, swapcase, upper, lower, title
     print(f"{string.capitalize() = }")
     print(f"{string.swapcase() = }")
