@@ -2,6 +2,7 @@ import random
 import shutil
 import sys
 import textwrap
+import math
 
 
 def print_5s():
@@ -19,7 +20,7 @@ def notlatin_string():
     not_latin_bytes = not_latin.encode('utf-8')
     print(f"{len(not_latin_bytes) = }")
     print(f"{not_latin_bytes = }")
-notlatin_string()
+# notlatin_string()
 
 
 def working_with_bytes():
@@ -57,17 +58,17 @@ def string_search(word, replace_with='fishcake'):
     # count
     print(f"sentence has {sentence.count(word)} occurrences of '{word}'")
     # find, index
-    start_index = sentence.find(word)
+    start_index = sentence.find(word) # only finds the first occurance
     print(f"location of '{word}': {start_index}")
-    next_index = sentence.index(word, start_index + len(word))
+    next_index = sentence.index(word, start_index + len(word)) #index function is the same as find
     print(f"next location of '{word}': {next_index}")
     print(f"{sentence[start_index:start_index + len(word)] = }")
     print(f"{sentence[next_index:next_index + len(word)] = }")
     # replace
-    print(f"{sentence.replace(word, replace_with)}")
+    print(f"{sentence.replace(word, replace_with)}") # replaces all instances
 
 
-def string_is_properties(string):
+def string_is_properties(string): #if we gave it a variable data type e.g. (string: str) then each function below would give a brief overview of that data type
     # isalnum, isalpha, isprintable, isspace
     print(f"{string.isalnum() = }")
     print(f"{string.isalpha() = }")
@@ -99,7 +100,20 @@ def slicing_and_dicing_strings(string, tail=" ><|()[]"):
     # join
     print(f"{' '.join(split_sentence) = }")
 
+#TASK
+new_sentence = "violet_blue|convert|red|6.3327|9.4423|113.3428|7.3298|5.3353|9.9283|over|all"
+def get_distance(string):
 
+    print(f"{new_sentence = }")
+    split_new_sentence = new_sentence.split('|')
+    print(f"{split_new_sentence}")
+    float_values = list(map(float, split_new_sentence[3:9])) # this takes out the chunk of the list we need
+    print(float_values)
+    x1, y1, z1, x2, y2, z2 = float_values
+    distance = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2 + (z2 - z1) ** 2)
+    print(f"{distance = }")
+
+get_distance(new_sentence)
 def string_method_formatting(string: str):
     width, height = shutil.get_terminal_size()
     print(f"terminal dimensions (w,h): {width, height}")
