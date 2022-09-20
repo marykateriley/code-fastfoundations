@@ -25,7 +25,7 @@ def main():
     lock = multiprocessing.Lock()
     proc1 = multiprocessing.Process(target=func1, args=(lock,))
     proc2 = multiprocessing.Process(target=func2, args=(lock,))
-    proc1.start()
+    proc1.start() # aquires the lock
     proc2.start()
     proc1.join()
     proc2.join()
