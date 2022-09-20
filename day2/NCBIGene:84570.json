@@ -1,0 +1,19 @@
+{
+    "taxon": {
+        "id": "NCBITaxon:9606",
+        "label": "Homo sapiens"
+    },
+    "association_counts": null,
+    "xrefs": null,
+    "description": null,
+    "types": null,
+    "synonyms": null,
+    "deprecated": null,
+    "replaced_by": null,
+    "consider": null,
+    "id": "HGNC:18603",
+    "label": "COL25A1",
+    "iri": null,
+    "category": null,
+    "retrieved": "2022-09-20T13:57:14.010778"
+}
