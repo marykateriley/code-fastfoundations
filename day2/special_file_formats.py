@@ -5,21 +5,24 @@ def working_with_gzip_files():
     import gzip
     # read
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/our_deepest_fear.txt.gz"
+            "dir1/dir3/dir4/our_deepest_fear.txt.gz",
+        mode = 'rt',
+        encoding = 'utf-8'
+
     ) as g:
         text = g.read()
         print(type(text))
     # write
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/youth.txt.gz",
+            "dir1/dir3/dir4/youth.txt.gz",
             'wb'
     ) as g:  # a binary file
         # g.write("It takes a very long time to become young.\n") # TypeError
         # g.write("― Pablo Picasso\n") # TypeError
-        g.write("It takes a very long time to become young.\n".encode('utf-8'))
+        g.write("It takes a very long time to become young.\n".encode('utf-8')) # as we are in binary mode, we have to encode
         g.write("― Pablo Picasso\n".encode('utf-8'))
     with gzip.open(
-            "/Users/paulkorir/PycharmProjects/code-fastfoundations/day2/dir1/dir3/dir4/youth.txt.gz"
+            "dir1/dir3/dir4/youth.txt.gz"
     ) as g:
         print(g.read())
 
@@ -32,14 +35,31 @@ def read_json_file():
     print(f"{type(response) = }")  # a requests.models.Response object
     print(f"{response.status_code = } 👍")  # 200 is OK
     print(f"{response.text = }")
-    data = json.loads(response.text)  # actually, response.json() does this already!
-    print(f"{data = }")
+    data = json.loads(response.text)  # actually, response.json() does this already! # loads means load string
+    print(f"{data = }") # replaces nulls with none
     print(f"{type(data) = }")  # OMG!
     # now we can modify it
-    data['retrieved'] = datetime.datetime.now().isoformat()
+    data['retrieved'] = datetime.datetime.now().isoformat() # datetime.datetime.now() gets the current date-time. isoformat() formats date-time in a certain way
     # then we write it out
     with open("NCBIGene:84570.json", 'w') as j:
-        json.dump(data, j, indent=4)
+        json.dump(data, j, indent=4) # makes all lines in the document has an indent of 4, indent automatically seperates rows
+
+#TASK
+def convert_gtf_to_gz(): ## get the right answer on solutions
+    import gzip
+    with open("Homo_sapiens.GRCh38.107.shuffled_and_truncated.gtf", 'wb') as f, gzip.open("Homo_sapiens.GRCh38.107.shuffled_and_truncated_zipped.gtf.gz"): #edited the suffix to include zipped and gz
+        for row in f:
+            g.write(row.encode('utf-8'))
+
+    with gzip.open("Homo_sapiens.GRCh38.107.shuffled_and_truncated_zipped.gtf.gz") as g:
+        for row in g:
+            print(row)
+
+    import pathlib
+    uncompressed_path = pathlib.Path("Homo_sapiens.GRCh38.107.shuffled_and_truncated.gtf")
+    print(f"{uncompressed_path.stat() = }")
+
+convert_gtf_to_gz()
 
 
 def working_with_binary_data():
@@ -79,8 +99,8 @@ def compressing_binary_data():
 def main():
     # working_with_gzip_files()
     # read_json_file()
-    working_with_binary_data()
-    compressing_binary_data()
+    # working_with_binary_data()
+    # compressing_binary_data()
     return 0
 
 
