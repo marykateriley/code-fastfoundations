@@ -2,14 +2,14 @@ import multiprocessing
 import sys
 
 
-class GeometricSeries(multiprocessing.Process):
+class GeometricSeries(multiprocessing.Process): # GeometricSeries is a subclass of the Multiproccesing class
     def __init__(self, a, r, n=10):
         self.a = a
         self.r = r
         self.n = n
         super().__init__()
 
-    def run(self):
+    def run(self): # the multiprocessing library expects a run process
         """Where the action is"""
         if self.r == 1:
             print(f"s_{self.n} ({self.a}, {self.r}) = {self.a * (self.n + 1)}")

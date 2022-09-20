@@ -16,14 +16,14 @@ def main():
     inputs = [(random.randint(1, 10), random.random(), random.randint(10, 100)) for _ in range(10)]
     print(f"{inputs[:10] = }")
     start = time.time()
-    solutions = list(itertools.starmap(calculate_geometric_series, inputs))
-    print(f"{solutions[:10] = }")
+    solutions = list(itertools.starmap(calculate_geometric_series, inputs)) #starmap is a different version of map. Map would give all iterables seperately. starmap takes the first value from each interable and zips it, then the second value etc.
     print(f"itertools.starmap took            {time.time() - start:.10f} seconds")
+    print(f"{solutions[:10] = }")
     start = time.time()
     # create a pool; results returned
     with multiprocessing.Pool(processes=multiprocessing.cpu_count()) as pool:
         solutions = pool.starmap(calculate_geometric_series, inputs)
-    print(f"multiprocessing.Pool.starmap took {time.time() - start:.10f} seconds")
+    print(f"multiprocessing.Pool.starmap took {time.time() - start:.10f} seconds") # starmap takes slightly longer as it's multiprocessing
     print(f"{solutions[:10] = }")
     return 0
 

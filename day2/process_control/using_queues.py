@@ -24,7 +24,7 @@ class Consumer(multiprocessing.Process):
         self.queue = queue
 
     def run(self):
-        time.sleep(5)
+        time.sleep(5) # this is a delay of 5 seconds before the consumer starts. this is why the consumer starts after the producer and then finishes after
         while True:
             if self.queue.empty():
                 print("Consumer is done!")
@@ -33,6 +33,8 @@ class Consumer(multiprocessing.Process):
                 item = self.queue.get()
                 print(f"Consumer <== {item}")
                 time.sleep(1)
+
+
 
 
 def main():

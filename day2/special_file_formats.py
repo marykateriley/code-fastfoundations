@@ -59,25 +59,26 @@ def convert_gtf_to_gz(): ## get the right answer on solutions
     uncompressed_path = pathlib.Path("Homo_sapiens.GRCh38.107.shuffled_and_truncated.gtf")
     print(f"{uncompressed_path.stat() = }")
 
-convert_gtf_to_gz()
+#convert_gtf_to_gz()
 
 
 def working_with_binary_data():
     import random
-    import struct
-    random.seed(1234)  # seeding the RNG
-    data = [random.random() for _ in range(10)]  # get <count> rands
+    import struct # packs data into bits
+    import zlib
+    random.seed(1234)  # seeding the RNG (random number generator - will be the same random numbers for comparison)
+    data = [random.random() for _ in range(10)]  # get <count> rands - list comprehension - doing a for loop on one line
     print(f"{data = }")
-    bin_data = struct.pack(f'<10f', *data)
+    bin_data = struct.pack(f'<10f', *data) # pack the 10 floating point numbers as binary data. * passes only the contents, not the list
     print(f"{bin_data = }")
     data2 = struct.unpack(f'<10f', bin_data)
     print(f"{data2 = }")
 
-    # str_data = ','.join(map(str, data))  # convert numbers to strings with commas between
-    # print(f"str_data:     [{len(str_data)} bytes]\n\t* {str_data[:100]}...")
-    # print(f"bin_data:     [{len(bin_data)} bytes]\n\t* {bin_data[:100]}...")
-    # zip_bin_data = zlib.compress(bin_data)
-    # print(f"zip_bin_data: [{len(zip_bin_data)} bytes]\n\t* {zip_bin_data[:100]}...")
+    str_data = ','.join(map(str, data))  # convert numbers to strings with commas between
+    print(f"str_data:     [{len(str_data)} bytes]\n\t* {str_data[:100]}...")
+    print(f"bin_data:     [{len(bin_data)} bytes]\n\t* {bin_data[:100]}...")
+    zip_bin_data = zlib.compress(bin_data)
+    print(f"zip_bin_data: [{len(zip_bin_data)} bytes]\n\t* {zip_bin_data[:100]}...")
 
 
 def compressing_binary_data():
@@ -94,6 +95,25 @@ def compressing_binary_data():
     bin_data2 = zlib.decompress(zip_bin_data)
     data2 = struct.unpack(f'<10f', bin_data2)
     print(f"{data2 = }")
+
+#TASK
+def binary_float_and_int():
+    import struct
+    import random
+    int_data = [random.randint(0, 200) for _ in range(1000)]
+    float_data = [random.random() for _ in range(1000)]
+    bin_data = struct.pack("<1000i", *int_data)
+    bin_data += struct.pack("<1000f", *float_data)
+    print(len(bin_data))
+#binary_float_and_int()
+
+def revert_to_actual_from_binary(bin_data): ## get the answer from solutions
+    import struct
+    int_data = struct.unpack("<1000i", bin_data[:4000])
+    print(f"{int_data[-10:]}") # unpacks the last 10 digits
+    float_data = struct.unpack("<1000f", bin_data[4000:])
+    print(f"{float_data[-10:]}")
+#revert_to_actual_from_binary()
 
 
 def main():
