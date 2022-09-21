@@ -50,7 +50,7 @@ def main():
     # pysam_read_sam_file()
     # pysam_read_bam_file()
     # pysam_get_pileup()
-    htseq_read_fastq()
+    #htseq_read_fastq()
     return 0
 
 
