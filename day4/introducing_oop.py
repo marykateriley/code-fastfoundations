@@ -43,7 +43,7 @@ class Circle:
     def draw(self, pen):
         if pen.isdown():
             pen.up()
-        pen.goto(*self.position)
+        pen.goto(*self.position) # enables it to be drawn at any position
         pen.down()
         pen.begin_fill()
         pen.pencolor(self.stroke)
@@ -83,7 +83,7 @@ class Rectangle:
     def draw(self, pen): # writing how to draw a rectangle in this code block
         if pen.isdown():
             pen.up()
-        pen.goto(*self.position)
+        pen.goto(*self.position) # enables rectangle to be drawn at any position
         pen.down()
         pen.begin_fill()
         pen.pencolor(self.stroke)
@@ -139,11 +139,21 @@ class Canvas(turtle.TurtleScreen):
     def draw(self, shape):
         shape.draw(self.pen)
 
-class Text:
-    def __int__(self, text, position=(0, 0), colour="black"):
+    def write(self, text):
+        text.write(self.pen)
+
+class Text: ## CHECK SOLUTION
+    def __int__(self, text, position=(0, 0), colour="black", move=False, align='left', font=('Ariel', 15, 'normal')):
         self.text = text
         self.position = position
         self.colour = colour
+        self.move = move
+        self.align = align
+        self.font = font
+
+    def write(self,text):
+        pen.goto(*self.position)
+        turtle.write(self.text, move=self.move, align=self.align, font=self.font)
 
 
 def main():
@@ -154,7 +164,7 @@ def main():
     print(small_circle.arc_length(100, True))
     print(small_circle.bounding_box())
 
-    my_rectangle = Rectangle(30, 50, position=(-15, -15), fill='grey', stroke='indigo')
+    my_rectangle = Rectangle(30, 50, position=(100, -15), fill='grey', stroke='indigo')
     print(my_rectangle.area())
     print(my_rectangle.perimeter())
     print(my_rectangle.diagonal())
@@ -172,8 +182,10 @@ def main():
     #my_canvas.draw_circle(small_circle)
     #my_canvas.draw(small_circle)
     #my_canvas.draw(big_circle)
-    my_canvas.draw(my_rectangle)
+    #my_canvas.draw(my_rectangle)
     #my_canvas.draw(my_square)
+    #my_text = Text("Mary-Kate") CHECK SOLUTION
+    #my_canvas.write(my_text) CHECK SOLUTION
     turtle.done()
 
 
