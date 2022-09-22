@@ -80,6 +80,21 @@ class Canvas(turtle.TurtleScreen):
         self.screensize(width, height, bg=bg)
         self.width = width
         self.height = height
+
+        self.pen = turtle.RawTurtle(canvas)
+
+    def canvas_cross(self):
+        self.pen.up()
+        self.pen.goto(0, self.height / 2)
+        self.pen.down()
+        self.pen.goto(0, -self.height / 2)
+        self.pen.up()
+        self.pen.goto(-self.width / 2, 0)
+        self.pen.down()
+        self.pen.goto(self.width / 2, 0)
+        self.pen.up()
+        self.pen.home()
+
     def __str__(self):
         return f"Canvas of dimensions = ({self.width}, {self.height})"
 
@@ -113,6 +128,7 @@ def main():
 
     my_canvas = Canvas(1200, 750)
     print(my_canvas)
+    my_canvas.canvas_cross()
     turtle.done()
 
 
