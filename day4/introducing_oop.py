@@ -40,6 +40,19 @@ class Circle:
         ymin = self.position[1] - self.radius,
         ymax = self.position[1] + self.radius
         return f"Bounding Box = {xmin, xmax, ymin, ymax}"
+    def draw(self, pen):
+        if pen.isdown():
+            pen.up()
+        pen.goto(*self.position)
+        pen.down()
+        pen.begin_fill()
+        pen.pencolor(self.stroke)
+        pen.fillcolor(self.fill)
+        pen.circle(self.radius)
+        pen.end_fill()
+        pen.up()
+
+
 
 
 class Rectangle:
@@ -67,6 +80,28 @@ class Rectangle:
         ymax = self.position[1] + 0.5 * self.height,
         return f"Bounding Box = {xmin, xmax, ymin, ymax}"
 
+    def draw(self, pen): # writing how to draw a rectangle in this code block
+        if pen.isdown():
+            pen.up()
+        pen.goto(*self.position)
+        pen.down()
+        pen.begin_fill()
+        pen.pencolor(self.stroke)
+        pen.fillcolor(self.fill)
+        pen.forward(self.width)
+        pen.right(90)
+        pen.forward(self.height)
+        pen.right(90)
+        pen.forward(self.width)
+        pen.right(90)
+        pen.forward(self.height)
+        pen.right(90)
+        pen.end_fill()
+        pen.up()
+
+
+
+
 
 class Square(Rectangle):  # inherited from parent class, rectangle
     def __init__(self, width, *args, **kwargs):
@@ -80,10 +115,10 @@ class Canvas(turtle.TurtleScreen):
         self.screensize(width, height, bg=bg)
         self.width = width
         self.height = height
-
         self.pen = turtle.RawTurtle(canvas)
 
-    def canvas_cross(self):
+
+    def draw_axis(self):
         self.pen.up()
         self.pen.goto(0, self.height / 2)
         self.pen.down()
@@ -98,6 +133,11 @@ class Canvas(turtle.TurtleScreen):
     def __str__(self):
         return f"Canvas of dimensions = ({self.width}, {self.height})"
 
+    def draw_circle(self, circle):
+        self.pen.circle(circle.radius) # taking the circle class previously created e.g. small_circle
+
+    def draw(self, shape):
+        shape.draw(self.pen)
 
 class Text:
     def __int__(self, text, position=(0, 0), colour="black"):
@@ -108,19 +148,19 @@ class Text:
 
 def main():
     small_circle = Circle(10)
-    big_circle = Circle(50)
+    big_circle = Circle(100, position=(20, -10), fill="red", stroke="yellow")
     print(small_circle.area())  # this needs a specifc circle defined, not a number
     print(small_circle.perimenter())
     print(small_circle.arc_length(100, True))
     print(small_circle.bounding_box())
 
-    my_rectangle = Rectangle(4, 5, (0, 0), )
+    my_rectangle = Rectangle(30, 50, position=(-15, -15), fill='grey', stroke='indigo')
     print(my_rectangle.area())
     print(my_rectangle.perimeter())
     print(my_rectangle.diagonal())
     print(my_rectangle.bounding_box())
 
-    my_square = Square(4)
+    my_square = Square(30)
     print(my_square.area())
     print(my_square.perimeter())
     print(my_square.diagonal())
@@ -128,7 +168,12 @@ def main():
 
     my_canvas = Canvas(1200, 750)
     print(my_canvas)
-    my_canvas.canvas_cross()
+    #my_canvas.draw_axis()
+    #my_canvas.draw_circle(small_circle)
+    #my_canvas.draw(small_circle)
+    #my_canvas.draw(big_circle)
+    my_canvas.draw(my_rectangle)
+    #my_canvas.draw(my_square)
     turtle.done()
 
 
