@@ -37,6 +37,7 @@ def plot_histogram():
     import random
     data = [random.gauss(0, 1) for _ in range(1000)]  # N(0, 1) normal
     fig, ax = plt.subplots()
+    # data and number of bins
     n, bins, patches = ax.hist(data, 20, density=True)
     plt.show()
 
@@ -44,7 +45,7 @@ def plot_histogram():
 def plot_boxplot():
     import matplotlib.pyplot as plt
     import numpy as np
-    data = np.random.normal((3, 5, 4), (1.25, 1.00, 1.25), (100, 3))
+    data = np.random.normal((3, 5, 4), (1.25, 1.00, 1.25), (100, 3)) # each of the items that we are plotting, is a set of values. it gets the distributon for each
     fig, ax = plt.subplots()
     bplot = ax.boxplot(data)
     plt.show()
@@ -58,8 +59,8 @@ def plot_multiplots_and_export():
     y1 = np.sin(x1)
     x2 = [random.random() for _ in range(30)]
     y2 = [random.random() for _ in range(30)]
-    fig, axs = plt.subplots(1, 2)
-    axs[0].plot(x1, y1)
+    fig, axs = plt.subplots(1, 2) # specify how many rows
+    axs[0].plot(x1, y1) # need to index both plots
     axs[1].scatter(x2, y2)
     plt.show()
     fig.savefig('plot_multiplot_and_export.png')
@@ -105,8 +106,8 @@ def plot_axes():
     ax.plot(x, y, label="sin(x)")
     ax.plot(x, z, label="cos(x)")
     ax.legend()
-    ax.set_title('Plot Title')
-    fig.suptitle('Useful for multiple plots')
+    ax.set_title('Plot Title') # this is the main title
+    fig.suptitle('Useful for multiple plots') # title for individual figure
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.grid(True, linestyle='-.')
