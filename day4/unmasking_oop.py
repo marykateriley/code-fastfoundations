@@ -7,10 +7,12 @@ class Circle:
     units = 'cm'  # all circles will have the same units
     units_squared = 'cm' '\u00B2' # this is the hexadecimal to square the unit defined
 
-    def __init__(self, radius, position=(0, 0)):
+    def __init__(self, radius, position=(0, 0), fill = "white", stroke = "black"):
         self.radius = radius  # each circle will have a particular radius
         self.position = position
         self.diameter = radius * 2
+        self.fill = fill
+        self.stroke = stroke
         #self.area = math.pi * radius**2 # have commented this out as we went on to define area below
 
     def __str__(self):  # Python special methods
