@@ -143,7 +143,7 @@ class Canvas(turtle.TurtleScreen):
         text.write(self.pen)
 
 class Text: ## CHECK SOLUTION
-    def __int__(self, text, position=(0, 0), colour="black", move=False, align='left', font=('Ariel', 15, 'normal')):
+    def __init__(self, text, position=(0, 0), colour='black', move=False, align='left', font=('Arial', 8, 'normal')):
         self.text = text
         self.position = position
         self.colour = colour
@@ -151,9 +151,15 @@ class Text: ## CHECK SOLUTION
         self.align = align
         self.font = font
 
-    def write(self,text):
+    def write(self, pen):
+        if pen.isdown():
+            pen.up()
         pen.goto(*self.position)
-        turtle.write(self.text, move=self.move, align=self.align, font=self.font)
+        pen.write(self.text, move=self.move, align=self.align, font=self.font)
+        pen.up()
+
+    def __str__(self):
+        return self.text
 
 
 def main():
@@ -184,8 +190,8 @@ def main():
     #my_canvas.draw(big_circle)
     #my_canvas.draw(my_rectangle)
     #my_canvas.draw(my_square)
-    #my_text = Text("Mary-Kate") CHECK SOLUTION
-    #my_canvas.write(my_text) CHECK SOLUTION
+    text = Text("this is cool!", font=('Helvetica', 20, 'bold'), position=(-100, -100))
+    my_canvas.write(text)
     turtle.done()
 
 
