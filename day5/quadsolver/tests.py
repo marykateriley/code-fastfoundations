@@ -1,7 +1,7 @@
 import sys
 import unittest
 
-from day5.quadsolver import main, cli
+from day5.quadsolver import main, cli # day 5 is a package and quadsolver is a package, main and cli are the modules
 
 
 class TestQuadratricSolver(unittest.TestCase):
